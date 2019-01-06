@@ -1,0 +1,56 @@
+.blog-header {
+	font-family: 'Major Mono Display', monospace;
+	background: #afff23;
+	font-size: 400%;
+}
+
+div h3 {
+	font-family: 'Major Mono Display', monospace;
+	font-weight: 800;
+	color: white;
+}
+
+h3 sub {
+	font-size: 50%;
+	color: tomato;
+}
+
+.post {
+	background: #006666;
+	padding: 40px;
+}
+
+.post-text {
+	color: white;
+	font-family: 'Josefin Sans', sans-serif;
+}
+
+.btn {
+	font-family: 'Josefin Sans', sans-serif;
+}
+
+.title-input {
+	border: 2px solid #006666;
+	border-radius: 4px;
+	width: 100%;
+	padding: 20px;
+}
+
+.text-input {
+	border: 2px solid #006666;
+	border=border-radius: 4px;
+	width: 100%;
+	padding: 20px;
+}
+
+div h3 a:hover {
+	color: white;
+}
+
+div h3 a:visited {
+	color: white;
+}
+
+div h3 a:link {
+	color: white;
+}

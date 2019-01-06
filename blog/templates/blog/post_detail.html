@@ -1,0 +1,16 @@
+{% extends "templates/base.html" %}
+
+{% block title %}{{ block.super }} {{ object.title }}{% endblock %}
+
+{% block content %}
+<div class="post">
+	<h3>{{ object.title }} <a class="fa fa-edit" href="{% url 'blog:update' pk=object.pk %}"></a><br>
+	<sub>{{ object.created_date|timesince}} ago</sub></h3>
+	<span class="post-text">{{ object.text }}</span><br>
+	<b class="post-text"><u>{{ object.author|upper }}</u></b>
+</div><br>
+
+<div class="post" align="center">
+	<a href="{% url 'blog:delete' pk=object.pk %}" class="btn btn-danger">Delete</a>
+</div>
+{% endblock %}

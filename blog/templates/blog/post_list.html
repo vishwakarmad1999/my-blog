@@ -3,7 +3,13 @@
 {% block title %}{{ block.super }} Home{% endblock %}
 
 {% block content %}
-<div>
-	<h1 class="text-center">Kaise ho be sab</h1>
-</div>
+	{% if request.user.is_authenticated %}
+		{% for obj in object_list %}
+		<div class="post">
+			<h3><a href="{% url 'blog:detail' obj.pk %}">{{ obj.title }}</a><br>
+		</div><br>
+		{% endfor %}
+	{% else %}
+		<h1 class="text-center">You need to login</h1>
+	{% endif %}
 {% endblock %}
