@@ -28,7 +28,7 @@ class PostDetail(DetailView):
 class PostCreate(LoginRequiredMixin, CreateView):
 	template_name = 'blog/post_create.html'
 	form_class = PostForm
-	success_url = "/blog"
+	success_url = "/"
 
 	def form_valid(self, form):
 		print(form)
