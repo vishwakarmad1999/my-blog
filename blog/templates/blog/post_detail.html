@@ -4,13 +4,18 @@
 
 {% block content %}
 <div class="post">
-	<h3>{{ object.title }} <a class="fa fa-edit" href="{% url 'blog:update' pk=object.pk %}"></a><br>
+	<h3>{{ object.title }} 
+		{% if request.user == object.user %}
+		<a class="fa fa-edit" href="{% url 'blog:update' pk=object.pk %}"></a>
+		{% endif %}
+		<br>
 	<sub>{{ object.created_date|timesince}} ago</sub></h3>
 	<span class="post-text">{{ object.text }}</span><br>
 	<b class="post-text"><u>{{ object.author|upper }}</u></b>
 </div><br>
-
+{% if request.user == object.user %}
 <div class="post" align="center">
 	<a href="{% url 'blog:delete' pk=object.pk %}" class="btn btn-danger">Delete</a>
 </div>
+{% endif %}
 {% endblock %}

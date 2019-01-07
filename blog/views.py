@@ -9,6 +9,7 @@ from django.views.generic import (
 						)
 from .models import Post
 from .forms import PostForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class PostList(ListView):
@@ -21,24 +22,22 @@ class PostList(ListView):
 
 class PostDetail(DetailView):
 	template_name = "blog/post_detail.html"
-
-	def get_queryset(self):
-		queryset = Post.objects.filter(author = self.request.user)
-		return queryset
+	queryset = Post.objects.all()	
 
 
-class PostCreate(CreateView):
+class PostCreate(LoginRequiredMixin, CreateView):
 	template_name = 'blog/post_create.html'
 	form_class = PostForm
 	success_url = "/blog"
 
 	def form_valid(self, form):
+		print(form)
 		instance = form.save(commit = False)
 		instance.author = self.request.user
 		return super(PostCreate, self).form_valid(form)
 
 
-class PostUpdate(UpdateView):
+class PostUpdate(LoginRequiredMixin, UpdateView):
 	template_name = 'blog/post_update.html'
 	form_class = PostForm
 	success_url = "/blog"
@@ -48,6 +47,10 @@ class PostUpdate(UpdateView):
 		return queryset
 
 
-class PostDelete(DeleteView):
+class PostDelete(LoginRequiredMixin, DeleteView):
 	model = Post
 	success_url = "/blog"
+
+	def get_queryset(self):
+		queryset = Post.objects.filter(author = self.request.user)
+		return queryset

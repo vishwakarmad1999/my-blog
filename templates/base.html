@@ -2,14 +2,18 @@
 <html>
 <head>
 	<title>{% block title %}Blog | {% endblock %}</title>
-
 	{% include "templates/cdn.html" %}
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-	<h1 class="text-center blog-header container">
-		<a href="/blog" style="text-decoration: none; color: inherit;">Blogs</a>&nbsp;<a href="{% url 'blog:create' %}">&#43;</a>
-	</h1>
+	<div class="text-center blog-header container">
+		<a href="{% url 'list' %}" style="text-decoration: none; color: inherit;">Blogs</a>&nbsp;<a href="{% url 'blog:create' %}">&#43;</a>
+	</div>
+	{% if request.user.is_authenticated %}
+	<div class="container text-right text">
+		<a href="{% url 'logout' %}" style="font-size: 150%;">Logout</a>
+	</div>
+	{% endif %}
 	<div class="container">
 		{% block content %} {% endblock %}
 	</div>

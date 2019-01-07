@@ -25,7 +25,7 @@ h3 sub {
 	font-family: 'Josefin Sans', sans-serif;
 }
 
-.btn {
+.btn, .text {
 	font-family: 'Josefin Sans', sans-serif;
 }
 
@@ -53,4 +53,19 @@ div h3 a:visited {
 
 div h3 a:link {
 	color: white;
+}
+
+#id_username, #id_password, #id_email, #id_new_password1, #id_new_password2, #id_password1, #id_password2 {
+	border: 2px solid #006666;
+	border-radius: 4px;
+	padding: 10px;	
+}
+
+.box {
+	padding: 40px;
+}
+
+.link {
+	color: inherit;
+	text-decoration: none;
 }

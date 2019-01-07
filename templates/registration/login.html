@@ -1,0 +1,29 @@
+{% extends "templates/base.html" %}
+{% block title %}{{ block.super }} Login {% endblock %}
+
+{% load blog_extras %}
+
+{% block content %}
+<div align="center" class="box">
+	{% if form.errors %}
+	<div class="text">
+		{% for i in form.errors.values %}
+			<p>{{ i }}</p>
+		{% endfor %}
+	</div>
+	{% endif %}
+
+	<form method="POST" class="login-form">
+		{% csrf_token %}
+		{% for field in form %}
+			<span class="text">{{ field.label }}</span><br>
+			<span class="text">{{ field }}</span><br><br>
+		{% endfor %}
+		<input type="submit" class="btn btn-primary" value="Login">
+	</form><br>
+	<div class="text">
+		<a href="{% url 'register' %}">Sign up</a><br><hr>
+		<a href="{% url 'password_reset' %}">Did you forget your password?</a><br>
+	</div>
+</div>
+{% endblock %}
