@@ -131,7 +131,7 @@ EMAIL_HOST_USER = 'appdjango99@gmail.com'
 EMAIL_HOST_PASSWORD = 'django@123'
 
 # SIGN_IN SETUP
-LOGIN_URL = '/login/'
-LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = '/'
+LOGIN_REDIRECT_URL = '/blog/'
 LOGOUT_URL = '/logout/'
-LOGOUT_REDIRECT_URL = '/login/'
+LOGOUT_REDIRECT_URL = '/'

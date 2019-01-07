@@ -27,10 +27,9 @@ from blog.views import PostList
 from profiles.views import UserCreate, register_confirm, verify_activation_key
 
 urlpatterns = [
-    path('', PostList.as_view(), name = 'list'),
     path('admin/', admin.site.urls),
     path('blog/', include('blog.urls')),
-    path('login/', LoginView.as_view(), name = 'login'),
+    path('', LoginView.as_view(), name = 'login'),
     path('logout/', LogoutView.as_view(), name = 'logout'),
     path('register/', UserCreate.as_view(), name = 'register'),
     path('register-confirm/', register_confirm, name = 'register-confirm'),

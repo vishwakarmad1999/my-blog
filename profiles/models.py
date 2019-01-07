@@ -15,7 +15,7 @@ class Profile(models.Model):
 	def send_activation_mail(self):
 		send_mail(
 	    'Verify yourself',
-	    'Dear ' + self.user.username + '\nGo to this link: http://vishwakarmad1999.pythonanywhere.com/' + self.activation_key,
+	    'Dear ' + self.user.username + '\nGo to this link: ' + self.request.get_host + '/' + self.activation_key,
 	    '',
 	    [self.user.email],
 	    fail_silently=False,

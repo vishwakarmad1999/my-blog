@@ -28,7 +28,7 @@ class PostDetail(DetailView):
 class PostCreate(LoginRequiredMixin, CreateView):
 	template_name = 'blog/post_create.html'
 	form_class = PostForm
-	success_url = "/"
+	success_url = "/blog"
 
 	def form_valid(self, form):
 		print(form)
@@ -40,7 +40,7 @@ class PostCreate(LoginRequiredMixin, CreateView):
 class PostUpdate(LoginRequiredMixin, UpdateView):
 	template_name = 'blog/post_update.html'
 	form_class = PostForm
-	success_url = "/"
+	success_url = "/blog"
 
 	def get_queryset(self):
 		queryset = Post.objects.filter(author = self.request.user)
@@ -49,7 +49,7 @@ class PostUpdate(LoginRequiredMixin, UpdateView):
 
 class PostDelete(LoginRequiredMixin, DeleteView):
 	model = Post
-	success_url = "/"
+	success_url = "/blog"
 
 	def get_queryset(self):
 		queryset = Post.objects.filter(author = self.request.user)
