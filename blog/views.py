@@ -40,7 +40,7 @@ class PostCreate(LoginRequiredMixin, CreateView):
 class PostUpdate(LoginRequiredMixin, UpdateView):
 	template_name = 'blog/post_update.html'
 	form_class = PostForm
-	success_url = "/blog"
+	success_url = "/"
 
 	def get_queryset(self):
 		queryset = Post.objects.filter(author = self.request.user)
@@ -49,7 +49,7 @@ class PostUpdate(LoginRequiredMixin, UpdateView):
 
 class PostDelete(LoginRequiredMixin, DeleteView):
 	model = Post
-	success_url = "/blog"
+	success_url = "/"
 
 	def get_queryset(self):
 		queryset = Post.objects.filter(author = self.request.user)
