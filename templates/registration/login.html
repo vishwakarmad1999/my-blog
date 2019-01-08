@@ -25,5 +25,8 @@
 		<a href="{% url 'register' %}">Sign up</a><br><hr>
 		<a href="{% url 'password_reset' %}">Did you forget your password?</a><br>
 	</div>
+	<div class="text">
+		<a href="{% url 'social:begin' 'google-oauth2' %}">Login with Google</a><br>
+	</div>
 </div>
 {% endblock %}

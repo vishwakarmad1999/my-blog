@@ -25,6 +25,7 @@ from django.contrib.auth.views import (
                                 )
 from blog.views import PostList
 from profiles.views import UserCreate, register_confirm, verify_activation_key
+from django.conf.urls import url
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -38,4 +39,5 @@ urlpatterns = [
     path('pass-reset-confirm/<str:uidb64>/<slug:token>/', PasswordResetConfirmView.as_view(), name = 'password_reset_confirm'),
     path('pass-reset-complete/', PasswordResetCompleteView.as_view(), name = 'password_reset_complete'),
     path('activate/<str:key>/', verify_activation_key, name = 'verify-user'),
+    url(r'^auth/', include("social_django.urls", namespace = 'social')),
 ]
