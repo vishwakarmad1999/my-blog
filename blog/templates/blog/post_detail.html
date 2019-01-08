@@ -8,7 +8,7 @@
 		{% if request.user == object.author %}
 		<a class="fa fa-edit" href="{% url 'blog:update' pk=object.pk %}"></a>
 		{% endif %}
-		<span class="text">{{ object.author }}</span>
+		<span class="text">- {{ object.author }}</span>
 		<br>
 	<sub class="time-text">{{ object.created_date|timesince}} ago</sub></h3>
 	<span class="post-text">{{ object.text }}</span><br>
