@@ -42,6 +42,8 @@ def verify_activation_key(request, key = None):
 			if profile_obj.activation_key == key:
 				profile_obj.user.is_active = True
 				profile_obj.user.save()
+				profile_obj.activation_key = None
+				profile_obj.save()
 				return redirect('/login')
 		raise Http404
 
