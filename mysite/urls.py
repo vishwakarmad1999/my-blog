@@ -30,6 +30,7 @@ from django.conf.urls import url
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('blog/', include('blog.urls')),
+    path('auth/', include('social_django.urls')),
     path('', LoginView.as_view(), name = 'login'),
     path('logout/', LogoutView.as_view(), name = 'logout'),
     path('register/', UserCreate.as_view(), name = 'register'),
@@ -39,5 +40,4 @@ urlpatterns = [
     path('pass-reset-confirm/<str:uidb64>/<slug:token>/', PasswordResetConfirmView.as_view(), name = 'password_reset_confirm'),
     path('pass-reset-complete/', PasswordResetCompleteView.as_view(), name = 'password_reset_complete'),
     path('activate/<str:key>/', verify_activation_key, name = 'verify-user'),
-    url(r'^auth/', include("social_django.urls", namespace = 'social')),
 ]

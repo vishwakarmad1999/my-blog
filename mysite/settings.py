@@ -25,7 +25,7 @@ SECRET_KEY = 'wp23y3%d*o7c&&2nua*+mcpmw8%is()c5+_=)h7fybks0mueh&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com', 'spoofed-domain.com']
+ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com', 'spoofed-domain.com', 'localhost']
 
 
 # Application definition
@@ -39,8 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # My apps
     'blog',
-    'social_django',
     'profiles',
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -51,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',  # <--
 ]
 
 ROOT_URLCONF = 'mysite.urls'
@@ -66,22 +67,12 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'social_django.context_processors.backends',
-                'social_django.context_processors.login_redirect',
+                'social_django.context_processors.backends',  # <--
+                'social_django.context_processors.login_redirect', # <--
             ],
         },
     },
 ]
-
-AUTHENTICATION_BACKENDS = (
- 'social_core.backends.open_id.OpenIdAuth',  # for Google authentication
- 'social_core.backends.google.GoogleOpenId',  # for Google authentication
- 'social_core.backends.google.GoogleOAuth2',  # for Google authentication
- # 'social_core.backends.github.GithubOAuth2',  # for Github authentication
- # 'social_core.backends.facebook.FacebookOAuth2',  # for Facebook authentication
- 
- 'django.contrib.auth.backends.ModelBackend',
-)
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
@@ -115,6 +106,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.open_id.OpenIdAuth', # for Google authentication
+    'social_core.backends.google.GoogleOpenId', # for Google authentication
+    'social_core.backends.google.GoogleOAuth2', # for Google authentication
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
@@ -150,5 +147,5 @@ LOGOUT_URL = '/logout/'
 LOGOUT_REDIRECT_URL = '/'
 
 # SOCIAL_AUTH SETUP
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '160035166107-e5l9shf5shm4ksnqts677ttqc1deaig4.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'Fersf-OxiAipiLzDijFNQ_AR'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY ='160035166107-qgbfaahcjeqgs9o9l79l8j8ji1qk8vqk.apps.googleusercontent.com' 
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'tS7ZgdAtgiIf-nuYoaVUQJ4-' 
