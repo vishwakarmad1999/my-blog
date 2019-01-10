@@ -5,7 +5,7 @@
 <form method="POST">
 	{% csrf_token %}
 	{% for field in form %}
-		<span class="text">{{ field.label_tag }}</span>
+		<span class="text">{{ field.label_tag }}</span><br>
 		<span>{{ field }}</span>
 	{% endfor %}
 	<input type="submit" value="Create" class="btn btn-success">
