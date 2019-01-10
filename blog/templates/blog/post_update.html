@@ -4,7 +4,10 @@
 {% block content %}
 <form method="POST">
 	{% csrf_token %}
-	{{ form.as_p }}
-	<input type="submit" value="Update" class="btn btn-primary">
+	{% for field in form %}
+		<span class="text">{{ field.label_tag }}</span>
+		<span>{{ field }}</span>
+	{% endfor %}
+	<input type="submit" value="Create" class="btn btn-primary">
 </form>
 {% endblock %}
