@@ -73,4 +73,6 @@ div h3 a:link {
 .google-btn {
 	background: #faebd7;
 	width: 80%;
+	border: 2px solid black;
+	border=border-radius: 4px;
 }
