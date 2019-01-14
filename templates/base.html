@@ -12,6 +12,10 @@
 	<div class="text-center blog-header container">
 		<a href="{% url 'blog:list' %}" style="text-decoration: none; color: inherit;">Blogs</a>&nbsp;<a href="{% url 'blog:create' %}">&#43;</a>
 	</div>
+	<br>
+	<div class="container">
+		{% block content %} {% endblock %}
+	</div>
 	<div class="container text-center text">
 	{% if request.user.is_authenticated %}
 		<a href="{% url 'logout' %}" style="font-size: 150%;">Logout</a>
@@ -20,9 +24,6 @@
 			<a href="{% url 'login' %}" style="font-size: 150%;">Login</a>
 		{% endif %}
 	{% endif %}
-	<br></div>
-	<div class="container">
-		{% block content %} {% endblock %}
-	</div>
+	</div><br>
 </body>
 </html>
