@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import Http404
 from django.views.generic import (
 						ListView, 
@@ -10,15 +10,41 @@ from django.views.generic import (
 from .models import Post
 from .forms import PostForm
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
 
 
 class PostList(ListView):
 	template_name	= "blog/post_list.html"
 	
 	def get_queryset(self):
-		queryset = Post.objects.order_by("-created_date")
+		following = self.request.user.profile.following.all()
+
+		following_ids = [i.id for i in following]
+
+		queryset = Post.objects.filter(author__id__in = following_ids).order_by("-created_date")
+
 		return queryset
 
+
+	def post(self, request, *args, **kwargs):
+		qs = User.objects.filter(username__icontains = request.POST['username'])
+
+		following = self.request.user.profile.following.all()
+
+		following_ids = [i.id for i in following]
+
+		following_posts = Post.objects.filter(author__id__in = following_ids).order_by("-created_date")
+
+		if not qs.exists():
+			qs = -1
+
+		context = {
+			"queryset": qs,
+			"object_list": following_posts,
+		}
+
+		print(context)
+		return render(request, "blog/post_list.html", context)		
 
 class PostDetail(DetailView):
 	template_name = "blog/post_detail.html"

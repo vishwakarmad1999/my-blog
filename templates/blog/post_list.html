@@ -1,0 +1,35 @@
+{% extends "templates/base.html" %}
+
+{% block title %}{{ block.super }} Home{% endblock %}
+
+{% block content %}
+<div align="center">
+	<form method="POST">{% csrf_token %}
+		<input type="text" name="username" placeholder="Search Users" class="text" id="searched">
+		<input type="submit" value="Search" class="btn btn-primary">
+	</form>
+</div><br>
+
+<div align="center">
+{% if queryset and queryset != -1 %}
+	{% for u in queryset %}
+		<a href="{% url 'user:detail' u.username %}" class="text">{{ u }}</a>
+	{% endfor %}
+{% elif queryset == -1 %}
+	<h4>No such user found</h4>
+{% endif %}
+</div><br>
+
+<h1 class="text text-center"><a class="text-primary" href="{% url 'user:detail' request.user %}">{{ request.user }}'s</a> following feed</h1>
+
+{% if object_list %}
+	{% for obj in object_list %}
+		<div class="post">
+			<h3><a href="{% url 'blog:detail' obj.pk %}">{{ obj.title }} - {{ obj.author }}</a><br>
+		</div><br>
+	{% endfor %}
+{% else %}
+	<h2 class="text text-center">You don't follow any user</h2>
+{% endif %}
+
+{% endblock %}

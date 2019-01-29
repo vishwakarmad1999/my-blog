@@ -1,0 +1,25 @@
+{% extends "templates/base.html" %}
+
+{% block title %}{{ block.super }} User Feeds {% endblock %}
+
+{% load blog_extras %}
+
+{% block content %}
+<div class="container text">
+	<h1 class="text-center">{{ username|title }}'s Feeds&nbsp;
+		
+		{% if not request.user.username == username %}
+		<form method="POST"> {% csrf_token %}
+			<input type="hidden" name="username" value="{{ username }}">
+			<input type="submit" value="{% if is_following %}Unfollow{% else %}Follow{% endif %}" class="btn btn-{% if is_following %}danger{% else %}primary{% endif %}">
+		</form>
+		{% endif %}
+
+	</h1>
+	{% for obj in object_list %}
+	<div class="post">
+		<h3><a href="{% url 'blog:detail' obj.pk %}">{{ obj.title }}</a><br>
+	</div><br>
+	{% endfor %}
+</div>
+{% endblock %}

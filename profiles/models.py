@@ -6,11 +6,23 @@ from django.core.mail import send_mail
 
 User = settings.AUTH_USER_MODEL
 
+class ProfileManager(models.Manager):
+	def toggle_follow(self, request_user, profile_user):
+		is_following = profile_user in request_user.profile.following.all()
+		if is_following:
+			request_user.profile.following.remove(profile_user)
+		else:
+			request_user.profile.following.add(profile_user)
+
+
 # This is the model used in the backend to verify a user by using a activation mail
  
 class Profile(models.Model):
 	user 			= models.OneToOneField(User, on_delete = models.CASCADE)
 	activation_key	= models.CharField(max_length = 30, null = True, blank = True)
+	following 		= models.ManyToManyField(User, related_name = 'followers')
+
+	objects = ProfileManager()
 
 	def send_activation_mail(self):
 		send_mail(

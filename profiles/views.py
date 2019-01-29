@@ -1,11 +1,12 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import CreateView, View
+from django.views.generic import CreateView, View, ListView
 from django.shortcuts import render, redirect
 from django.http import Http404
 
 from .forms import UserCreateForm
 from .models import Profile
+from blog.models import Post
 
 User = get_user_model()
 
@@ -22,14 +23,6 @@ class UserCreate(CreateView):
 		if self.request.user.is_authenticated:
 			return redirect('/')
 		return super(UserCreate, self).dispatch(*args, **kwargs)
-
-
-# HomeView acts as a landing for an authenticated user
-
-class HomeView(LoginRequiredMixin, View):
-	def get(self, request):
-		template_name = 'templates/home.html'
-		return render(request, template_name, {})
 
 
 # This view is responsible for verify the activation key of a newly registered user
@@ -53,3 +46,34 @@ def verify_activation_key(request, key = None):
 def register_confirm(request):
 	template_name = "templates/register_confirm.html"
 	return render(request, template_name, {})
+
+
+class UserPostView(ListView):
+	template_name 	= "user/user_feeds.html"
+
+	def get_queryset(self):
+		queryset = Post.objects.filter(author__username = self.kwargs['username'])
+		return queryset
+
+
+	def get_context_data(self, *args, **kwargs):
+		context = super(UserPostView, self).get_context_data(*args, **kwargs)
+		context['username'] = self.kwargs['username']
+
+		user = User.objects.get(username = context['username'])
+		request_user = self.request.user
+
+		is_following = user in request_user.profile.following.all()
+		context['is_following'] = is_following
+
+		return context
+
+
+	def post(self, request, *args, **kwargs):
+		username = request.POST.get("username")
+		request_user = request.user
+		profile_user = User.objects.get(username__iexact = username)
+
+		Profile.objects.toggle_follow(request_user, profile_user)
+
+		return redirect(f"/u/{username}/")	
