@@ -76,4 +76,4 @@ class UserPostView(ListView):
 
 		Profile.objects.toggle_follow(request_user, profile_user)
 
-		return redirect(f"/u/{username}/")	
+		return redirect("/u/" + username)	
