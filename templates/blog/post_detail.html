@@ -11,7 +11,11 @@
 		<span class="text">- <a href="{% url 'user:detail' object.author %}">{{ object.author }}</a></span>
 		<br>
 	<sub class="time-text">{{ object.created_date|timesince}} ago</sub></h3>
-	<span class="post-text">{{ object.text }}</span><br>
+	<span class="post-text">
+		{% for line in object.text.splitlines %}
+			{{ line }}<br>
+		{% endfor %}
+	</span>
 </div><br>
 {% if request.user == object.author %}
 <div class="post" align="center">

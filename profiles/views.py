@@ -52,7 +52,7 @@ class UserPostView(ListView):
 	template_name 	= "user/user_feeds.html"
 
 	def get_queryset(self):
-		queryset = Post.objects.filter(author__username = self.kwargs['username'])
+		queryset = Post.objects.filter(author__username = self.kwargs['username']).order_by("-created_date")
 		return queryset
 
 
