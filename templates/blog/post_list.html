@@ -14,6 +14,7 @@
 {% if queryset and queryset != -1 %}
 	{% for u in queryset %}
 		<a href="{% url 'user:detail' u.username %}" class="text">{{ u }}</a>
+		<br>
 	{% endfor %}
 {% elif queryset == -1 %}
 	<h4>No such user found</h4>

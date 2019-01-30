@@ -43,7 +43,6 @@ class PostList(ListView):
 			"object_list": following_posts,
 		}
 
-		print(context)
 		return render(request, "blog/post_list.html", context)		
 
 class PostDetail(DetailView):
