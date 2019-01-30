@@ -16,10 +16,18 @@
 		{% endif %}
 
 	</h1>
-	{% for obj in object_list %}
-	<div class="post">
-		<h3><a href="{% url 'blog:detail' obj.pk %}">{{ obj.title }}</a><br>
-	</div><br>
-	{% endfor %}
+	{% if object_list %}
+		{% for obj in object_list %}
+		<div class="post">
+			<h3><a href="{% url 'blog:detail' obj.pk %}">{{ obj.title }}</a><br>
+		</div><br>
+		{% endfor %}
+	{% else %}
+		{% if not request.user.username == username %}
+			<h4 class="text-center">The user hasn't added any content</h4>
+		{% else %}
+			<h4 class="text-center">Click on <a href="{% url 'blog:create' %}">+</a> to add some</h4>
+		{% endif %}
+	{% endif %}
 </div>
 {% endblock %}
