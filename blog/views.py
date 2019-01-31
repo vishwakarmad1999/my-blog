@@ -13,7 +13,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 
 
-class PostList(ListView):
+class PostList(LoginRequiredMixin, ListView):
 	template_name	= "blog/post_list.html"
 	
 	def get_queryset(self):
@@ -27,8 +27,6 @@ class PostList(ListView):
 
 
 	def post(self, request, *args, **kwargs):
-		qs = User.objects.filter(username__icontains = request.POST['username'])
-
 		following = self.request.user.profile.following.all()
 
 		following_ids = [i.id for i in following]
