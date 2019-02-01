@@ -27,6 +27,8 @@ class PostList(LoginRequiredMixin, ListView):
 
 
 	def post(self, request, *args, **kwargs):
+		qs = User.objects.filter(username__icontains = request.POST.get("username"))
+
 		following = self.request.user.profile.following.all()
 
 		following_ids = [i.id for i in following]
