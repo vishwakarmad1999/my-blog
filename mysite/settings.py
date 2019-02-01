@@ -110,7 +110,6 @@ AUTHENTICATION_BACKENDS = (
     'social_core.backends.open_id.OpenIdAuth', # for Google authentication
     'social_core.backends.google.GoogleOpenId', # for Google authentication
     'social_core.backends.google.GoogleOAuth2', # for Google authentication
-    'social_core.backends.facebook.FacebookOAuth2', # for Facebook authenticatio
     'django.contrib.auth.backends.ModelBackend',
 )
 
@@ -150,6 +149,3 @@ LOGOUT_REDIRECT_URL = '/'
 # SOCIAL_AUTH SETUP
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY ='160035166107-qgbfaahcjeqgs9o9l79l8j8ji1qk8vqk.apps.googleusercontent.com' 
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'tS7ZgdAtgiIf-nuYoaVUQJ4-' 
-
-SOCIAL_AUTH_FACEBOOK_KEY = '2492622060766834'
-SOCIAL_AUTH_FACEBOOK_SECRET = '5a67aba6e85508bc6160c86c84b41c08'
