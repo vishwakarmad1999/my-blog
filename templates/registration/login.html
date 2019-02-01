@@ -21,13 +21,13 @@
 		{% endfor %}
 		<input type="submit" class="btn btn-primary" value="Login">
 	</form><br>
-		<a href="{% url 'social:begin' 'google-oauth2' %}" style="text-decoration: none;">
-			<div class="google-btn">
-				<span class="text" style="color: black;">Sign in with</span>
-	            <img width="40px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" class="google-img" />
-			</div>
-	     </a>
- <br><br>
+
+	<div>
+	     <a href="{% url 'social:begin' 'facebook' %}" style="text-decoration: none;" class="text"><span class="fa fa-facebook facebook"></span></a>
+		<a href="{% url 'social:begin' 'google-oauth2' %}" 
+		style="text-decoration: none;" class="text"><span class="fa fa-google google"></span></a>
+	</div>
+ <br>
 	<div class="text">
 		<a href="{% url 'register' %}">Sign up</a><br><hr>
 		<a href="{% url 'password_reset' %}">Did you forget your password?</a><br>
