@@ -32,7 +32,11 @@
 			{% endif %}
 				<span class="text">- <a href="{% url 'user:detail' obj.author %}">{{ obj.author }}</a></span><br>
 			<sub class="time-text">{{ obj.created_date|timesince}} ago</sub></h3>
-			<span class="post-text">{{ obj.text }}</span><br>		
+			<span class="post-text">
+				{% for line in obj.text.splitlines %}
+				{{ line }}<br>
+				{% endfor %}
+			</span>		
 		</div><br>
 	{% endfor %}
 {% else %}
