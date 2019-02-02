@@ -26,11 +26,17 @@
 {% if object_list %}
 	{% for obj in object_list %}
 		<div class="post">
-			<h3><a href="{% url 'blog:detail' obj.pk %}">{{ obj.title }} - {{ obj.author }}</a><br>
+			<h3>{{ obj.title }}
+			{% if request.user == obj.author %}
+				<a class="fa fa-edit" href="{% url 'blog:update' pk=obj.pk %}"></a>
+			{% endif %}
+				<span class="text">- <a href="{% url 'user:detail' obj.author %}">{{ obj.author }}</a></span><br>
+			<sub class="time-text">{{ obj.created_date|timesince}} ago</sub></h3>
+			<span class="post-text">{{ obj.text }}</span><br>		
 		</div><br>
 	{% endfor %}
 {% else %}
 	<h2 class="text text-center">You don't follow any user</h2>
 {% endif %}
-
+	
 {% endblock %}
