@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.http import Http404
 from django.views.generic import (
@@ -56,26 +57,37 @@ class PostCreate(LoginRequiredMixin, CreateView):
 	success_url = "/blog"
 
 	def form_valid(self, form):
-		print(form)
 		instance = form.save(commit = False)
 		instance.author = self.request.user
 		return super(PostCreate, self).form_valid(form)
+
+	def get_success_url(self, *args, **kwargs):
+		messages.success(self.request, "Post created successfully", extra_tags = 'created')
+		return self.object.get_absolute_url()
 
 
 class PostUpdate(LoginRequiredMixin, UpdateView):
 	template_name = 'blog/post_update.html'
 	form_class = PostForm
-	success_url = "/blog"
 
 	def get_queryset(self):
 		queryset = Post.objects.filter(author = self.request.user)
 		return queryset
+
+
+	def get_success_url(self, *args, **kwargs):
+		messages.success(self.request, "Post updated successfully", extra_tags = 'updated')
+		return self.object.get_absolute_url()
 
 
 class PostDelete(LoginRequiredMixin, DeleteView):
 	model = Post
-	success_url = "/blog"
 
 	def get_queryset(self):
 		queryset = Post.objects.filter(author = self.request.user)
 		return queryset
+
+
+	def get_success_url(self, *args, **kwargs):
+		messages.success(self.request, "Post deleted successfully", extra_tags = 'deleted')
+		return self.object.get_absolute_url()

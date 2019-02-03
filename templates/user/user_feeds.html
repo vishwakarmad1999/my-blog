@@ -6,6 +6,24 @@
 
 {% block content %}
 <div class="container text">
+
+	{% if messages %}
+		{% for message in messages %}
+		<div class="alert 
+		{% if 'created' in message.tags %}
+			alert-success
+		{% elif 'updated' in message.tags %}
+			alert-primary
+		{% elif 'deleted' in message.tags %}
+			alert-danger
+		{% endif %} 
+		alert-dismissible fade show text-center">
+		  <button type="button" class="close" data-dismiss="alert">&times;</button>
+		  <strong>{{ message }}</strong>
+		</div><br>
+		{% endfor %}
+	{% endif %}
+
 	<h1 class="text-center">{{ username|title }}'s Feeds&nbsp;
 		
 		{% if not request.user.username == username %}
