@@ -24,7 +24,7 @@
 		{% endfor %}
 	{% endif %}
 
-	<h class="text-center">{{ username }}'s Feeds&nbsp;
+	<h1 class="text-center">{{ username }}'s Feeds&nbsp;
 		
 		{% if not request.user.username == username %}
 		<form method="POST"> {% csrf_token %}
