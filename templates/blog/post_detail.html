@@ -22,4 +22,7 @@
 	<a href="{% url 'blog:delete' pk=object.pk %}" class="btn btn-danger">Delete</a>
 </div><br>
 {% endif %}
-{% endblock %}
+<div class="post post-text" align="center">
+	<a href="whatsapp://send?text={{ share_content }}" style="color: inherit; text-decoration: none; font-size: 120%;">Share on <span class="fa fa-whatsapp"></span></a>
+</div><br>
+{% endblock %}	

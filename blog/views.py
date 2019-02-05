@@ -1,4 +1,5 @@
 from django.contrib import messages
+from urllib.parse import quote_plus
 from django.shortcuts import render, redirect
 from django.http import Http404
 from django.views.generic import (
@@ -49,6 +50,13 @@ class PostList(LoginRequiredMixin, ListView):
 class PostDetail(DetailView):
 	template_name = "blog/post_detail.html"
 	queryset = Post.objects.all()	
+
+	def get_context_data(self, *args, **kwargs):
+		context = super(PostDetail, self).get_context_data(*args, **kwargs)
+
+		context['share_content'] = quote_plus(self.object.text)
+
+		return context
 
 
 class PostCreate(LoginRequiredMixin, CreateView):
