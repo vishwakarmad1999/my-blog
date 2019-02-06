@@ -60,11 +60,12 @@ class UserPostView(ListView):
 		context = super(UserPostView, self).get_context_data(*args, **kwargs)
 		context['username'] = self.kwargs['username']
 
-		user = User.objects.get(username = context['username'])
-		request_user = self.request.user
+		if self.request.user.is_authenticated:
+			user = User.objects.get(username = context['username'])
+			request_user = self.request.user
 
-		is_following = user in request_user.profile.following.all()
-		context['is_following'] = is_following
+			is_following = user in request_user.profile.following.all()
+			context['is_following'] = is_following
 
 		return context
 

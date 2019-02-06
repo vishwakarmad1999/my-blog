@@ -25,14 +25,14 @@
 	{% endif %}
 
 	<h1 class="text-center">{{ username }}'s Feeds&nbsp;
-		
+	{% if request.user.is_authenticated %}
 		{% if not request.user.username == username %}
 		<form method="POST"> {% csrf_token %}
 			<input type="hidden" name="username" value="{{ username }}">
 			<input type="submit" value="{% if is_following %}Unfollow{% else %}Follow{% endif %}" class="btn btn-{% if is_following %}danger{% else %}primary{% endif %}">
 		</form>
 		{% endif %}
-
+	{% endif %}
 	</h1>
 	{% if object_list %}
 		{% for obj in object_list %}

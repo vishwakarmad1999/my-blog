@@ -1,8 +1,6 @@
 {% extends "templates/base.html" %}
 {% block title %}{{ block.super }} Login {% endblock %}
 
-{% load blog_extras %}
-
 {% block content %}
 <div align="center" class="box">
 	{% if form.errors %}
@@ -13,7 +11,7 @@
 	</div>
 	{% endif %}
 
-	<form method="POST" class="login-form">
+	<form method="POST">
 		{% csrf_token %}
 		{% for field in form %}
 			<span class="text">{{ field.label }}</span><br>
