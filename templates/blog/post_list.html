@@ -2,6 +2,15 @@
 
 {% block title %}{{ block.super }} Home{% endblock %}
 
+{% block head_extra %}
+<style type="text/css">	
+	hr {
+		border-top: 1px solid white;
+	}
+</style>
+{% endblock %}
+
+
 {% load blog_extras %}
 
 {% block content %}
@@ -31,11 +40,9 @@
 			<h3>{{ obj.title }}
 			<span class="text">- <a href="{% url 'user:detail' obj.author %}"><u>{{ obj.author }}</u></a></span><br>
 			<sub class="time-text">{{ obj.created_date|timesince}} ago</sub></h3>
-			<span class="post-text">
-				{% for line in obj.text.splitlines %}
-				{{ line }}<br>
-				{% endfor %}
-			</span><br>
+			<span class="post-text content-markdown">
+				{{ obj.text }}
+			</span><hr>
 			<div class="post-text" align="center" style="font-size: 130%;">
 				<a href="whatsapp://send?text={{ request.build_absolute_uri|get_qs }}{{ obj.pk }}" style="color: inherit; text-decoration: none;"><span class="fa fa-whatsapp"></span></a>&nbsp;&nbsp;&nbsp;
 				<a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri|get_qs }}%2F{{ obj.pk }}" style="color: inherit; text-decoration: none;"><span class="fa fa-facebook"></span></a>&nbsp;&nbsp;&nbsp;

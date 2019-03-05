@@ -1,10 +1,38 @@
 {% extends "templates/base.html" %}
 
 {% load blog_extras %}
-
 {% block title %}{{ block.super }} {{ object.title }}{% endblock %}
 
+{% block head_extra %}
+<style type="text/css">	
+	hr {
+		border-top: 1px solid white;
+	}
+</style>
+{% endblock %}
+
 {% block content %}
+
+<div class="container text">
+
+	{% if messages %}
+		{% for message in messages %}
+		<div class="alert 
+		{% if 'created' in message.tags %}
+			alert-success
+		{% elif 'updated' in message.tags %}
+			alert-primary
+		{% elif 'deleted' in message.tags %}
+			alert-danger
+		{% endif %} 
+		alert-dismissible fade show text-center">
+		  <button type="button" class="close" data-dismiss="alert">&times;</button>
+		  <strong>{{ message }}</strong>
+		</div><br>
+		{% endfor %}
+	{% endif %}
+</div>
+
 <div class="post">
 	<h3>{{ object.title }} 
 		{% if request.user == object.author %}
@@ -13,11 +41,11 @@
 		<span class="text">- <a href="{% url 'user:detail' object.author %}"><u>{{ object.author }}</u></a></span>
 		<br>
 	<sub class="time-text">{{ object.created_date|timesince}} ago</sub></h3>
-	<span class="post-text">
-		{% for line in object.text.splitlines %}
-			{{ line }}<br>
-		{% endfor %}
-	</span><br>
+	<br>
+	<div class="post-text content-markdown img-fluid">
+			{{ object.text }}
+	</div><hr> 
+
 	<div class="post-text" align="center" style="font-size: 130%;">
 		<a href="whatsapp://send?text={{ request.build_absolute_uri|get_qs }}" style="color: inherit; text-decoration: none;"><span class="fa fa-whatsapp"></span></a>&nbsp;&nbsp;&nbsp;
 		<a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri|get_qs }}" style="color: inherit; text-decoration: none;"><span class="fa fa-facebook"></span></a>&nbsp;&nbsp;&nbsp;

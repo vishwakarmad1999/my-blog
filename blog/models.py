@@ -1,13 +1,14 @@
 from django.db import models
 from django.conf import settings
 from django.urls import reverse
+from ckeditor.fields import RichTextField
 
 User = settings.AUTH_USER_MODEL
 
 class Post(models.Model):
 	author 			= models.ForeignKey(User, on_delete = models.CASCADE)
 	title 			= models.CharField(max_length = 60)
-	text 			= models.TextField()
+	text 			= RichTextField()
 	created_date	= models.DateTimeField(auto_now_add = True)
 	published_date	= models.DateTimeField(auto_now = True)
 
@@ -17,3 +18,7 @@ class Post(models.Model):
 
 	def get_absolute_url(self):
 		return reverse('user:detail', args=[self.author])
+
+
+	def get_post_url(self):
+		return reverse('blog:detail', args=[self.id])

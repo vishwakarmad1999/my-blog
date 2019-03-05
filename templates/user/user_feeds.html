@@ -9,15 +9,7 @@
 
 	{% if messages %}
 		{% for message in messages %}
-		<div class="alert 
-		{% if 'created' in message.tags %}
-			alert-success
-		{% elif 'updated' in message.tags %}
-			alert-primary
-		{% elif 'deleted' in message.tags %}
-			alert-danger
-		{% endif %} 
-		alert-dismissible fade show text-center">
+		<div class="alert alert-danger alert-dismissible fade show text-center">
 		  <button type="button" class="close" data-dismiss="alert">&times;</button>
 		  <strong>{{ message }}</strong>
 		</div><br>

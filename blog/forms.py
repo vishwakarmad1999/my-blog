@@ -18,9 +18,9 @@ class PostForm(forms.ModelForm):
 					"style": "font-family: 'Josefin Sans', sans-serif;"
 				}
 			)
-		self.fields['text'].widget = forms.Textarea(
-				attrs = {
-					"class": "text-input",
-					"style": "font-family: 'Josefin Sans', sans-serif;"
-				}
-			)
+		# self.fields['text'].widget = forms.Textarea(
+		# 		attrs = {
+		# 			"class": "text-input",
+		# 			"style": "font-family: 'Josefin Sans', sans-serif;"
+		# 		}
+		# 	)

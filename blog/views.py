@@ -47,16 +47,10 @@ class PostList(LoginRequiredMixin, ListView):
 
 		return render(request, "blog/post_list.html", context)		
 
+
 class PostDetail(DetailView):
 	template_name = "blog/post_detail.html"
 	queryset = Post.objects.all()	
-
-	def get_context_data(self, *args, **kwargs):
-		context = super(PostDetail, self).get_context_data(*args, **kwargs)
-
-		context['share_content'] = quote_plus(self.object.text)
-
-		return context
 
 
 class PostCreate(LoginRequiredMixin, CreateView):
@@ -67,11 +61,17 @@ class PostCreate(LoginRequiredMixin, CreateView):
 	def form_valid(self, form):
 		instance = form.save(commit = False)
 		instance.author = self.request.user
+
+		content = instance.text
+		content = content.replace("<img", "<img class='img-fluid mx-auto d-block'")
+		instance.text = content
+
 		return super(PostCreate, self).form_valid(form)
+
 
 	def get_success_url(self, *args, **kwargs):
 		messages.success(self.request, "Post created successfully", extra_tags = 'created')
-		return self.object.get_absolute_url()
+		return self.object.get_post_url()
 
 
 class PostUpdate(LoginRequiredMixin, UpdateView):
@@ -85,7 +85,7 @@ class PostUpdate(LoginRequiredMixin, UpdateView):
 
 	def get_success_url(self, *args, **kwargs):
 		messages.success(self.request, "Post updated successfully", extra_tags = 'updated')
-		return self.object.get_absolute_url()
+		return self.object.get_post_url()
 
 
 class PostDelete(LoginRequiredMixin, DeleteView):
