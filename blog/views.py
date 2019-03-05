@@ -81,11 +81,19 @@ class PostUpdate(LoginRequiredMixin, UpdateView):
 	def get_queryset(self):
 		queryset = Post.objects.filter(author = self.request.user)
 		return queryset
-
+	
 
 	def get_success_url(self, *args, **kwargs):
 		messages.success(self.request, "Post updated successfully", extra_tags = 'updated')
 		return self.object.get_post_url()
+
+
+	def form_valid(self, form):
+		content = instance.text
+		content = content.replace("<img", "<img class='img-fluid mx-auto d-block'")
+		instance.text = content
+
+		return super(PostUpdate, self).form_valid(form)
 
 
 class PostDelete(LoginRequiredMixin, DeleteView):
