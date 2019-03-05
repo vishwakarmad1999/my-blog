@@ -89,6 +89,8 @@ class PostUpdate(LoginRequiredMixin, UpdateView):
 
 
 	def form_valid(self, form):
+		instance = form.save(commit = False)
+
 		content = instance.text
 		content = content.replace("<img", "<img class='img-fluid mx-auto d-block'")
 		instance.text = content
