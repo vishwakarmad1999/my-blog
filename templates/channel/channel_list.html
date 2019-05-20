@@ -14,10 +14,19 @@
 
 {% block content %}
 <div class="text">
-	<h1 class="text-center">Channel's you've joined</h1><br><br>
-
-	{% for c in qs %}
-		<a href="/c/{{ c.slug }}" class="channel">{{ c }}</a><br>
-	{% endfor %}
+	<h1 class="text-center">Channel's you've joined</h1>
+	<br>
+</div>
+<div align="center">
+	<a class="badge badge-pill badge-primary" href="/c/create/" style="font-size: 200%">Add channel</a>
+</div><br>
+<div class="text">
+	{% if qs %}
+		{% for c in qs %}
+			<a href="/c/{{ c.slug }}" class="channel">{{ c }}</a><br>
+		{% endfor %}
+	{% else %}
+		<h2>Either create a new channel or search for other channels in the home page</h2>
+	{% endif %}
 </div>
 {% endblock %}	

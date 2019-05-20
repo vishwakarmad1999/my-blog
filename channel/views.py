@@ -57,4 +57,3 @@ class ChannelListView(LoginRequiredMixin, ListView):
 		queryset = Channel.objects.filter(joined = self.request.user)
 		context['qs'] = queryset
 		return context
-
