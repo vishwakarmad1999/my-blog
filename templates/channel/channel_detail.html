@@ -1,0 +1,49 @@
+{% extends "templates/base.html" %}
+
+{% block title %}Channel | {{ object.title }}{% endblock %}
+
+{% block content %}
+
+<div class="text text-center">
+	<h1><u>{{ object.title }}</u></h1>
+	{% if request.user.is_authenticated %}
+			{% if not request.user.username == username %}
+			<form method="POST"> {% csrf_token %}
+				<input type="hidden" name="username" value="{{ username }}">
+				<input type="submit" value="{% if is_joined %}Joined{% else %}Join{% endif %}" class="btn btn-{% if is_joined %}primary{% else %}outline-primary{% endif %}">
+			</form>
+			{% endif %}
+	{% endif %}
+</div>
+
+<br>
+<div class="text channel-detail">
+	<h4>Admin: <a href="/u/{{ object.admin }}/">{{ object.admin }}</a></h4>
+	<h4>Description:</h4>
+	<p style="display: inline;">{{ object.description }}</p><br><br>
+</div>
+
+<br>
+
+<div class="blog-header text-center">
+	<u>Members</u>
+</div>
+<div class="members">
+	{% for i in joined %}
+		<a href="/u/{{ i }}" style="color: white;">{{ i }}</a><br>
+	{% endfor %}
+</div><br>
+
+<h2 class="text-center">Posts</h2>
+{% if posts %}
+	{% for obj in posts %}
+	<div class="post">
+		<h3><a href="{% url 'blog:detail' obj.pk %}">{{ obj.title }}</a><br>
+	</div><br>
+	{% endfor %}
+{% else %}
+	<h4 class="text-center">This channel doesn't contain any posts yet.</h4>
+	<h4 class="text-center">Click on <a href="{% url 'blog:create' %}">+</a> to add some</h4>
+{% endif %}
+
+{% endblock %}

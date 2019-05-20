@@ -1,0 +1,23 @@
+{% extends "templates/base.html" %}
+
+{% block title %}Channel | List{% endblock %}
+
+{% block head_extra %}
+<style type="text/css">	
+	hr {
+		border-top: 1px solid white;
+	}
+</style>
+{% endblock %}
+
+{% load blog_extras %}
+
+{% block content %}
+<div class="text">
+	<h1 class="text-center">Channel's you've joined</h1><br><br>
+
+	{% for c in qs %}
+		<a href="/c/{{ c.slug }}" class="channel">{{ c }}</a><br>
+	{% endfor %}
+</div>
+{% endblock %}	

@@ -13,6 +13,7 @@ from .models import Post
 from .forms import PostForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
+from channel.models import Channel
 
 
 class PostList(LoginRequiredMixin, ListView):
@@ -31,18 +32,36 @@ class PostList(LoginRequiredMixin, ListView):
 	def post(self, request, *args, **kwargs):
 		qs = User.objects.filter(username__icontains = request.POST.get("username"))
 
+		is_channel = False
+
+		if not qs.exists():
+			qs = Channel.objects.filter(title__icontains = request.POST.get("username"))
+			qs = qs.values('slug')
+
+			temp = []
+
+			for i in qs:
+				temp.append(i['slug'])
+
+			qs = temp
+
+			is_channel = True
+
 		following = self.request.user.profile.following.all()
 
 		following_ids = [i.id for i in following]
 
 		following_posts = Post.objects.filter(author__id__in = following_ids).order_by("-created_date")
 
-		if not qs.exists():
+		print(qs)
+
+		if qs is []:
 			qs = -1
 
 		context = {
 			"queryset": qs,
 			"object_list": following_posts,
+			"is_channel": is_channel,
 		}
 
 		return render(request, "blog/post_list.html", context)		

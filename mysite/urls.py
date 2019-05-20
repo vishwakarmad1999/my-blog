@@ -17,6 +17,7 @@ urlpatterns = [
     path('blog/', include('blog.urls')),
     path('auth/', include('social_django.urls')),
     path('u/', include('profiles.urls')),
+    path('c/', include('channel.urls')),
     path('', LoginView.as_view(), name = 'login'),
     path('logout/', LogoutView.as_view(), name = 'logout'),
     path('register/', UserCreate.as_view(), name = 'register'),

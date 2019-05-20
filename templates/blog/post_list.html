@@ -10,7 +10,6 @@
 </style>
 {% endblock %}
 
-
 {% load blog_extras %}
 
 {% block content %}
@@ -22,7 +21,12 @@
 </div><br>
 
 <div align="center">
-{% if queryset and queryset != -1 %}
+{% if is_channel %}
+	{% for c in queryset %}
+		<a href="/c/{{ c }}" class="text">{{ c }}</a>
+		<br>
+	{% endfor %}
+{% elif queryset and queryset != -1 %}
 	{% for u in queryset %}
 		<a href="{% url 'user:detail' u.username %}" class="text">{{ u }}</a>
 		<br>
@@ -33,6 +37,8 @@
 </div><br>
 
 <h1 class="text text-center"><a class="text-primary" href="{% url 'user:detail' request.user %}">{{ request.user }}'s</a> following feed</h1>
+
+<h2 class="text-center"><a href="/c/list/">Channel's you've joined</a></h2>
 
 {% if object_list %}
 	{% for obj in object_list %}

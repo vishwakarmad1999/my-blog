@@ -80,3 +80,39 @@ div h3 a:link {
 	border: 2px solid #006666;
 	border-radius: 4px;
 }*/
+
+.channel {
+	display: block;
+	background: #4c5160;
+	padding: 40px 20px;
+	width: 100%;
+	color: white;
+	font-size: 200%;
+}
+
+.channel:hover {
+	color: white;
+}
+
+.channel-detail {
+	display: block;
+	background-image: linear-gradient(to right, #107896 , yellow);
+	padding: 40px 20px 0px 20px;
+	width: 100%;
+	color: white;
+}
+
+.members {
+	display: block;
+	font-family: 'Major Mono Display', monospace;
+	background: #107896;
+	color: white;
+	padding: 40px 20px;
+	text-decoration: none;
+	text-align: center;
+	font-size: 200%;
+}
+
+.members:hover {
+	color: white;
+}
