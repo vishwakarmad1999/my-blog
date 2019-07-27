@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>{% block title %}Blog | {% endblock %}</title>
+	<title>{% block title %}Expresso | {% endblock %}</title>
 	{% include "templates/cdn.html" %}
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,8 +13,12 @@
 </head>
 <body>
 	<div class="text-center blog-header container-fluid">
-		<a href="{% url 'blog:list' %}" style="text-decoration: none; color: inherit;">BLOGS</a>
-		<a href="{% url 'blog:create' %}" style="color: inherit;">&#43;</a>
+		<div style="display: inline">
+			<a href="{% url 'blog:list' %}" style="text-decoration: none; color: inherit;">Expresso</a>
+		</div>
+		<div style="display: inline; margin-left: 60px">
+			<a href="{% url 'blog:create' %}" style="color: inherit;">+</a>
+		</div>
 	</div>
 	<br>
 	<div class="container">
