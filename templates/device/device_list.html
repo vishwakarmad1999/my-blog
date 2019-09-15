@@ -1,0 +1,31 @@
+{% extends "templates/base.html" %}
+
+{% block title %}Device | List{% endblock %}
+
+{% block head_extra %}
+<style type="text/css">	
+	hr {
+		border-top: 1px solid white;
+	}
+</style>
+{% endblock %}
+
+{% load blog_extras %}
+
+{% block content %}
+<div class="text">
+	<h1 class="text-center">Device Data</h1>
+	<br>
+</div>
+
+<div class="text">
+	{% if object_list %}
+		{% for c in object_list %}
+			{{ c.device_name }} - {{ c.status }} - {{ c.timestamp }}<br>
+		{% endfor %}
+	{% else %}
+		<h2>No data received yet</h2>
+	{% endif %}
+</div>
+
+{% endblock %}	

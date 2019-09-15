@@ -7,7 +7,7 @@ from random import randint
 class Channel(models.Model):
 	admin 			= models.ForeignKey(User, on_delete=models.CASCADE)
 	title 			= models.CharField(max_length=30)
-	description 	= models.CharField(max_length=140)
+	description 	= models.CharField(max_length=500)
 	date_created	= models.DateField(auto_now_add=True)
 	joined 			= models.ManyToManyField(User, related_name='joined', blank=True)
 	slug 			= models.SlugField(blank=True)	 

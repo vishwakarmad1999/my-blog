@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'blog',
     'profiles',
     'channel',
+    'device',
 
     # Third party integration
     'social_django',

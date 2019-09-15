@@ -11,6 +11,7 @@ from django.contrib.auth.views import (
 from blog.views import PostList
 from profiles.views import UserCreate, register_confirm, verify_activation_key
 from django.conf.urls import url
+from device.views import fetch_device_data, ShowDevices
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -18,6 +19,8 @@ urlpatterns = [
     path('auth/', include('social_django.urls')),
     path('u/', include('profiles.urls')),
     path('c/', include('channel.urls')),
+    path('d/list/', ShowDevices.as_view()),
+    path('d/', fetch_device_data),
     path('', LoginView.as_view(), name = 'login'),
     path('logout/', LogoutView.as_view(), name = 'logout'),
     path('register/', UserCreate.as_view(), name = 'register'),
